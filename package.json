@@ -18,5 +18,8 @@
   "homepage": "https://github.com/fast-pager/fast-pager#readme",
   "devDependencies": {
     "jest": "^21.2.1"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1"
   }
 }
