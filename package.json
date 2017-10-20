@@ -4,7 +4,7 @@
   "description": "Cached Pagination for Node.JS",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/fast-pager/fast-pager/issues"
   },
-  "homepage": "https://github.com/fast-pager/fast-pager#readme"
+  "homepage": "https://github.com/fast-pager/fast-pager#readme",
+  "devDependencies": {
+    "jest": "^21.2.1"
+  }
 }
