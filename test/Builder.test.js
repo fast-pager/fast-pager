@@ -29,7 +29,7 @@ describe('Builder', () => {
     });
   });
 
-  describe('build', () => {
+  describe('build()', () => {
     let storageLocation = '';
     beforeEach((done) => {
       fs.mkdtemp(path.join(os.tmpdir(), 'pager-'), (err, pathname) => {
