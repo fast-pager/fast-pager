@@ -20,6 +20,10 @@ class Builder {
       throw new Error('Invalid argument: Context required.');
     }
 
+    if (!(retriever instanceof Function)) {
+      throw new Error('Invalid argument: Retriever must be a function');
+    }
+
     this._context = context;
     this._retriever = retriever;
   }
