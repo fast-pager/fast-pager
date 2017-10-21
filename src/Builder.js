@@ -1,4 +1,5 @@
 const fs = require('fs');
+const assert = require('assert');
 const path = require('path');
 const Context = require('./Context');
 
@@ -26,9 +27,7 @@ class Builder {
 
   build() {
     const storeToFile = (pageNum, result) => {
-      if (pageNum < 0) {
-        throw new Error('Page number must be positive and non-zero.');
-      }
+      assert(pageNum > 0);
 
       const pathname = this._context.getPrefix() + "-" + pageNum;
       return saveJSONObjectToFile(pathname, result);
