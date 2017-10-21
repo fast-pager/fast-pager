@@ -5,6 +5,10 @@ const path = require('path');
 const saveJSONObjectToFile = (pathname, object) => {
   return new Promise((resolve) => {
     fs.writeFile(pathname, JSON.stringify(object), (err) => {
+      if (err) {
+        reject(err);
+        return;
+      }
       resolve();
     });
   });

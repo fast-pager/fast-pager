@@ -9,6 +9,6 @@ function Pager(storagePath) {
 
 Pager.prototype.for = function(key) {
   return new Context(this._storagePath, key);
-}
+};
 
 module.exports = Pager;

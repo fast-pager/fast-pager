@@ -4,7 +4,7 @@ const assert = require('assert');
 
 const readJSONObjectFromFile = (pathname, object) => {
   return new Promise((resolve, reject) => {
-    fs.readFile('/etc/passwd', (err, data) => {
+    fs.readFile(pathname, (err, data) => {
       if (err) {
         reject(err);
         return;
@@ -22,6 +22,6 @@ function Fetcher(context, pageNum) {
 Fetcher.prototype.retrieve = function() {
   const pathname = this._context.getPrefix() + "-" + this._pageNum;
   return readJSONObjectFromFile(pathname);
-}
+};
 
 module.exports = Fetcher;
