@@ -17,14 +17,14 @@ describe('Builder', () => {
 
     test('invalid context', () => {
       expect(() => {
-        const builder = new Builder(null, () => { return Promise.resolve(); });
+        new Builder(null, () => { return Promise.resolve(); }); // eslint-disable-line no-new
       }).toThrow();
     });
 
     test('invalid retriever', () => {
       expect(() => {
         const context = new Context('test', 'test');
-        const builder = new Builder(context);
+        new Builder(context); // eslint-disable-line no-new
       }).toThrow();
     });
   });
@@ -36,7 +36,7 @@ describe('Builder', () => {
         storageLocation = pathname;
         done();
       });
-    })
+    });
 
     afterEach((done) => {
       fs.readdir(storageLocation, (err, files) => {
@@ -64,8 +64,9 @@ describe('Builder', () => {
           return Promise.resolve([]);
         }
 
-        return Promise.resolve([{title: 'test'}]);
-      }
+        return Promise.resolve([{ title: 'test' }]);
+      };
+
       const builder = new Builder(context, retriever);
       builder.build()
         .then(() => {

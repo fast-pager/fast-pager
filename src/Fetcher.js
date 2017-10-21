@@ -1,8 +1,7 @@
 const fs = require('fs');
-const path = require('path');
 const assert = require('assert');
 
-const readJSONObjectFromFile = (pathname, object) => {
+const readJSONObjectFromFile = (pathname) => {
   return new Promise((resolve, reject) => {
     fs.readFile(pathname, (err, data) => {
       if (err) {
@@ -15,12 +14,14 @@ const readJSONObjectFromFile = (pathname, object) => {
 };
 
 function Fetcher(context, pageNum) {
+  assert(context);
+  assert(pageNum);
   this._context = context;
   this._pageNum = pageNum;
 }
 
-Fetcher.prototype.retrieve = function() {
-  const pathname = this._context.getPrefix() + "-" + this._pageNum;
+Fetcher.prototype.retrieve = function retrieve() {
+  const pathname = this._context.getPrefix() + '-' + this._pageNum;
   return readJSONObjectFromFile(pathname);
 };
 

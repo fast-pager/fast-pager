@@ -8,17 +8,17 @@ function Context(storagePath, key) {
   this._key = key;
 }
 
-Context.prototype.from = function(callback) {
+Context.prototype.from = function from(callback) {
   return new Builder(this, callback);
 };
 
-Context.prototype.at = function(pageNum) {
-  assert(Number.isInteger(pageNum))
+Context.prototype.at = function at(pageNum) {
+  assert(Number.isInteger(pageNum));
   assert(pageNum > 0);
   return new Fetcher(this, pageNum);
 };
 
-Context.prototype.getPrefix = function() {
+Context.prototype.getPrefix = function getPrefix() {
   return path.join(this._storagePath, this._key);
 };
 

@@ -1,9 +1,8 @@
 const fs = require('fs');
 const assert = require('assert');
-const path = require('path');
 
 const saveJSONObjectToFile = (pathname, object) => {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     fs.writeFile(pathname, JSON.stringify(object), (err) => {
       if (err) {
         reject(err);
@@ -24,16 +23,16 @@ function Builder(context, retriever) {
   this._retriever = retriever;
 }
 
-Builder.prototype.build = function() {
+Builder.prototype.build = function build() {
   const storeToFile = (pageNum, result) => {
     assert(pageNum > 0);
 
-    const pathname = this._context.getPrefix() + "-" + pageNum;
+    const pathname = this._context.getPrefix() + '-' + pageNum;
     return saveJSONObjectToFile(pathname, result);
   };
 
   const storeMeta = (totalPages) => {
-    const pathname = this._context.getPrefix() + "-meta";
+    const pathname = this._context.getPrefix() + '-meta';
     const payload = {
       pages: totalPages,
       updated: Date.now()
@@ -45,7 +44,7 @@ Builder.prototype.build = function() {
   const retrieveAndStore = (pageNum) => {
     return this._retriever(pageNum)
       .then((result) => {
-        if (result.length == 0) {
+        if (result.length === 0) {
           // no more results here
           return storeMeta(pageNum - 1);
         }
