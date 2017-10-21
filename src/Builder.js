@@ -3,12 +3,8 @@ const path = require('path');
 const Context = require('./Context');
 
 const saveJSONObjectToFile = (pathname, object) => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     fs.writeFile(pathname, JSON.stringify(object), (err) => {
-      if (err) {
-        reject(err);
-        return;
-      }
       resolve();
     });
   });
