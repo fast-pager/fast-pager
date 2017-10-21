@@ -11,6 +11,12 @@
     "type": "git",
     "url": "git+https://github.com/fast-pager/fast-pager.git"
   },
+  "keywords": [
+    "pagination",
+    "filesystem",
+    "pages",
+    "paginator"
+  ],
   "author": "Sam-Mauris Yong",
   "license": "MIT",
   "bugs": {
