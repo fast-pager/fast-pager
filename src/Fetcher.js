@@ -30,4 +30,4 @@ class Fetcher {
   }
 }
 
-export default Fetcher;
+module.exports = Fetcher;

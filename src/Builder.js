@@ -62,4 +62,4 @@ class Builder {
   }
 }
 
-export default Builder;
+module.exports = Builder;
