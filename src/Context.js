@@ -1,4 +1,6 @@
 const path = require('path');
+const Builder = require('./Builder');
+const Fetcher = require('./Fetcher');
 
 class Context {
   constructor(storagePath, key) {
