@@ -1,4 +1,5 @@
 const path = require('path');
+const assert = require('assert');
 const Builder = require('./Builder');
 const Fetcher = require('./Fetcher');
 
@@ -13,6 +14,8 @@ class Context {
   }
 
   at(pageNum) {
+    assert(isNumeric(pageNum))
+    assert(pageNum > 0);
     return new Fetcher(this, pageNum);
   }
 
