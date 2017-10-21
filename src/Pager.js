@@ -3,14 +3,12 @@ const path = require('path');
 const Promise = require('bluebird');
 const Context = require('./Context');
 
-class Pager {
-  constructor(storagePath) {
-    this._storagePath = storagePath;
-  }
+function Pager(storagePath) {
+  this._storagePath = storagePath;
+}
 
-  for(key) {
-    return new Context(this._storagePath, key);
-  }
+Pager.prototype.for = function(key) {
+  return new Context(this._storagePath, key);
 }
 
 module.exports = Pager;

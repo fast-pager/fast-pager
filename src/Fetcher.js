@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const Context = require('./Context');
+const assert = require('assert');
 
 const readJSONObjectFromFile = (pathname, object) => {
   return new Promise((resolve, reject) => {
@@ -14,20 +14,14 @@ const readJSONObjectFromFile = (pathname, object) => {
   });
 };
 
-class Fetcher {
-  constructor(context, pageNum) {
-    if (!(context instanceof Context)) {
-      throw new Error('Invalid argument: Context required.');
-    }
+function Fetcher(context, pageNum) {
+  this._context = context;
+  this._pageNum = pageNum;
+}
 
-    this._context = context;
-    this._pageNum = pageNum;
-  }
-
-  retrieve() {
-    const pathname = this._context.getPrefix() + "-" + this._pageNum;
-    return readJSONObjectFromFile(pathname);
-  }
+Fetcher.prototype.retrieve = function() {
+  const pathname = this._context.getPrefix() + "-" + this._pageNum;
+  return readJSONObjectFromFile(pathname);
 }
 
 module.exports = Fetcher;
