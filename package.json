@@ -4,7 +4,8 @@
   "description": "Cached Pagination for Node.JS",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "lint": "eslint test src"
   },
   "repository": {
     "type": "git",
@@ -17,7 +18,8 @@
   },
   "homepage": "https://github.com/fast-pager/fast-pager#readme",
   "devDependencies": {
-    "jest": "^21.2.1"
+    "jest": "^21.2.1",
+    "eslint": "^4.9.0"
   },
   "dependencies": {
     "bluebird": "^3.5.1"
