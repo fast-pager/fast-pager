@@ -20,7 +20,7 @@ describe('Fetcher', () => {
           expect(data.length).toBe(1);
           expect(data[0].title).toBe('test');
           return Promise.resolve();
-        })
+        });
     });
   });
 });
