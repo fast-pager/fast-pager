@@ -4,7 +4,7 @@
   "description": "Cached Pagination for Node.JS",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest --coverage && npm run lint",
     "lint": "eslint test src"
   },
   "repository": {
