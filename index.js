@@ -1,2 +1,2 @@
 const FastPager = require('./src/Pager');
-module.export = FastPager;
+module.exports = FastPager;
