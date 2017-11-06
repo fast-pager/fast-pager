@@ -1,19 +1,10 @@
-const path = require('path');
-const redis = require('redis');
 const assert = require('assert');
 const Builder = require('./Builder');
 const Fetcher = require('./Fetcher');
-const FileStorage = require('./storage/FileStorage');
-const RedisStorage = require('./storage/RedisStorage');
+const StorageFactory = require('./storage/StorageFactory');
 
 function Context(storage, key) {
-  if (typeof storage === 'string') {
-    this._storage = new FileStorage(path.join(storage, key));
-  } else if (storage instanceof redis.RedisClient) {
-    this._storage = new RedisStorage(storage, key);
-  } else {
-    throw new Error('Invalid storage input');
-  }
+  this._storage = StorageFactory(storage, key);
   this._key = key;
 }
 
