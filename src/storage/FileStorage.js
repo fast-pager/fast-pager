@@ -1,10 +1,13 @@
+const fs = require('fs');
+
 function FileStorage(pathname) {
   this._pathname = pathname;
 }
 
-FileStorage.prototype.write = function write(data) {
+FileStorage.prototype.write = function write(page, data) {
   return new Promise((resolve, reject) => {
-    fs.writeFile(this._pathname, JSON.stringify(object), (err) => {
+    let pathname = this._pathname + '-' + page;
+    fs.writeFile(pathname, JSON.stringify(data), (err) => {
       if (err) {
         reject(err);
         return;
@@ -14,8 +17,9 @@ FileStorage.prototype.write = function write(data) {
   });
 };
 
-FileStorage.prototype.read = function read() {
+FileStorage.prototype.read = function read(page) {
   return new Promise((resolve, reject) => {
+    let pathname = this._pathname + '-' + page;
     fs.readFile(pathname, (err, data) => {
       if (err) {
         reject(err);
