@@ -4,6 +4,7 @@ const assert = require('assert');
 const Builder = require('./Builder');
 const Fetcher = require('./Fetcher');
 const FileStorage = require('./storage/FileStorage');
+const RedisStorage = require('./storage/RedisStorage');
 
 function Context(storage, key) {
   if (typeof storage === 'string') {
