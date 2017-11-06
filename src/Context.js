@@ -10,6 +10,8 @@ function Context(storage, key) {
     this._storage = new FileStorage(path.join(storage, key));
   } else if (storage instanceof redis.RedisClient) {
     this._storage = new RedisStorage(storage, key);
+  } else {
+    throw new Error('Invalid storage input');
   }
   this._key = key;
 }
