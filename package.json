@@ -1,6 +1,6 @@
 {
   "name": "fast-pager",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Cached Pagination for Node.JS",
   "main": "index.js",
   "scripts": {
