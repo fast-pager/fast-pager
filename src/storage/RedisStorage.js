@@ -4,7 +4,7 @@ function RedisStorage(redisClient, key) {
 }
 
 RedisStorage.prototype.write = function write(page, data) {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     let handler = (err) => {
       if (err) {
         reject(err);
