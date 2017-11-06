@@ -17,9 +17,9 @@ There are two stages involved in FastPager: building and fetching. The building 
 There are two key information needed by FastPager when building pages: the context and the retrieval function.
 
 - The context represents the series of pages being retrieved: it is needed for storage so that it can be uniquely identified later.
-- The retrieval function
+- The retrieval function takes in a page number and performs the actual retrieval and pagination logic. It is repeatedly called with increments to the `page` parameter until an empty return is returned. A Promise is expected to be returned from this function.
 
-The following shows an example of a script that builds pages for posts sorted by date in descending order. In this example, [Sequelize](http://docs.sequelizejs.com/) is used for the script to retrieve the list of posts to be displayed.
+The following shows an example of a script that builds pages for posts sorted by date in descending order. In this example, [Sequelize](http://docs.sequelizejs.com/) is used for the script to retrieve the list of posts to be displayed. The pages are stored as JSON in files in a system temporary directory.
   
     const os = require('os');
     const path = require('path');
@@ -46,6 +46,8 @@ The following shows an example of a script that builds pages for posts sorted by
       .then(() => {
         console.log('Build Complete!');
       });
+      
+The build method returns a Promise which can be used to do additional work once the pagination build process is done. 
     
 ## Retrieving pages
 
