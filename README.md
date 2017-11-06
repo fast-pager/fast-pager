@@ -46,6 +46,34 @@ The following shows an example of a script that builds pages for posts sorted by
     .then(() => {
       console.log('Build Complete!');
     });
+    
+## Retrieving pages
+
+Once the pages are built, the webpages can retrieve the result without having to perform any pagination or retrieval from database logic:
+
+  const os = require('os');
+  const path = require('path');
+
+  const pager = new FastPager(path.join(os.tmpdir(), 'fastpager'));
+
+  app.get('/posts', (req, res, next) => {
+    let page = req.query.page || 1;
+    page = Number(page);
+    if (page < 0) {
+      page = 1;
+    }
+    return pager
+      .context('latest-posts')
+      .at(page)
+      .retrieve()
+      .then((posts) => {
+        res.json(posts);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(400);
+      });
+  });
 
 # License
 
