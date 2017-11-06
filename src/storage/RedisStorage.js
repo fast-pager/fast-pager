@@ -5,8 +5,14 @@ function RedisStorage(redisClient, key) {
 
 RedisStorage.prototype.write = function write(page, data) {
   return new Promise((resolve) => {
-    this._client.set(this._key + '-' + page, JSON.stringify(data));
-    resolve();
+    let handler = (err) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve();
+    };
+    this._client.set(this._key + '-' + page, JSON.stringify(data), handler);
   });
 };
 
