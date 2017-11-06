@@ -21,59 +21,59 @@ There are two key information needed by FastPager when building pages: the conte
 
 The following shows an example of a script that builds pages for posts sorted by date in descending order. In this example, [Sequelize](http://docs.sequelizejs.com/) is used for the script to retrieve the list of posts to be displayed.
   
-  const os = require('os');
-  const path = require('path');
-  const models = require('../models');
+    const os = require('os');
+    const path = require('path');
+    const models = require('../models');
 
-  const pager = new FastPager(path.join(os.tmpdir(), 'fastpager'));
-  const POSTS_PER_PAGE = 10;
-  
-  function buildLatestPostsPages() {
-    return pager
-      .context('latest-posts')
-      .from((page) => {
-        return models.Post
-          .findAll({
-            order: ['datePosted', 'desc'],
-            offset: (page - 1) * POSTS_PER_PAGE,
-            limit: POSTS_PER_PAGE
-          });
-      })
-      .build();
-  };
-  
-  buildLatestPostsPages()
-    .then(() => {
-      console.log('Build Complete!');
-    });
+    const pager = new FastPager(path.join(os.tmpdir(), 'fastpager'));
+    const POSTS_PER_PAGE = 10;
+    
+    function buildLatestPostsPages() {
+      return pager
+        .context('latest-posts')
+        .from((page) => {
+          return models.Post
+            .findAll({
+              order: ['datePosted', 'desc'],
+              offset: (page - 1) * POSTS_PER_PAGE,
+              limit: POSTS_PER_PAGE
+            });
+        })
+        .build();
+    };
+    
+    buildLatestPostsPages()
+      .then(() => {
+        console.log('Build Complete!');
+      });
     
 ## Retrieving pages
 
 Once the pages are built, the webpages can retrieve the result without having to perform any pagination or retrieval from database logic:
 
-  const os = require('os');
-  const path = require('path');
+    const os = require('os');
+    const path = require('path');
 
-  const pager = new FastPager(path.join(os.tmpdir(), 'fastpager'));
+    const pager = new FastPager(path.join(os.tmpdir(), 'fastpager'));
 
-  app.get('/posts', (req, res, next) => {
-    let page = req.query.page || 1;
-    page = Number(page);
-    if (page < 0) {
-      page = 1;
-    }
-    return pager
-      .context('latest-posts')
-      .at(page)
-      .retrieve()
-      .then((posts) => {
-        res.json(posts);
-      })
-      .catch((err) => {
-        console.error(err);
-        res.status(400);
-      });
-  });
+    app.get('/posts', (req, res, next) => {
+      let page = req.query.page || 1;
+      page = Number(page);
+      if (page < 0) {
+        page = 1;
+      }
+      return pager
+        .context('latest-posts')
+        .at(page)
+        .retrieve()
+        .then((posts) => {
+          res.json(posts);
+        })
+        .catch((err) => {
+          console.error(err);
+          res.status(400);
+        });
+    });
 
 # License
 
