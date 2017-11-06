@@ -2,9 +2,12 @@ const path = require('path');
 const assert = require('assert');
 const Builder = require('./Builder');
 const Fetcher = require('./Fetcher');
+const FileStorage = require('./storage/FileStorage');
 
-function Context(storagePath, key) {
-  this._storagePath = storagePath;
+function Context(storage, key) {
+  if (typeof storage === 'string') {
+    this._storage = new FileStorage(path.join(storage, key));
+  }
   this._key = key;
 }
 
@@ -18,8 +21,8 @@ Context.prototype.at = function at(pageNum) {
   return new Fetcher(this, pageNum);
 };
 
-Context.prototype.getPrefix = function getPrefix() {
-  return path.join(this._storagePath, this._key);
+Context.prototype.getStorage = function getStorage() {
+  return this._storage;
 };
 
 module.exports = Context;
