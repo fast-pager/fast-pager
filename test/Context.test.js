@@ -7,7 +7,7 @@ describe('Context', () => {
     test('initialized normally', () => {
       const context = new Context('test', 'key');
       expect(context).toBeTruthy();
-      expect(context._storagePath).toBe('test');
+      expect(context._storage).not.toBe(null);
       expect(context._key).toBe('key');
     });
   });
