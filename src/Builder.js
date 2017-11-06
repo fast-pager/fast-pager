@@ -1,17 +1,4 @@
-const fs = require('fs');
 const assert = require('assert');
-
-const saveJSONObjectToFile = (pathname, object) => {
-  return new Promise((resolve, reject) => {
-    fs.writeFile(pathname, JSON.stringify(object), (err) => {
-      if (err) {
-        reject(err);
-        return;
-      }
-      resolve();
-    });
-  });
-};
 
 function Builder(context, retriever) {
   assert(context);
@@ -27,18 +14,16 @@ Builder.prototype.build = function build() {
   const storeToFile = (pageNum, result) => {
     assert(pageNum > 0);
 
-    const pathname = this._context.getPrefix() + '-' + pageNum;
-    return saveJSONObjectToFile(pathname, result);
+    return this._context.getStorage().write(pageNum, result);
   };
 
   const storeMeta = (totalPages) => {
-    const pathname = this._context.getPrefix() + '-meta';
     const payload = {
       pages: totalPages,
       updated: Date.now()
     };
 
-    return saveJSONObjectToFile(pathname, payload);
+    return this._context.getStorage().write('meta', payload);
   };
 
   const retrieveAndStore = (pageNum) => {
