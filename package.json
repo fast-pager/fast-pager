@@ -24,8 +24,9 @@
   },
   "homepage": "https://github.com/fast-pager/fast-pager#readme",
   "devDependencies": {
+    "eslint": "^4.9.0",
     "jest": "^21.2.1",
-    "eslint": "^4.9.0"
+    "redis": "^2.8.0"
   },
   "dependencies": {
     "bluebird": "^3.5.1",
