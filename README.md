@@ -49,7 +49,18 @@ The following shows an example of a script that builds pages for posts sorted by
         console.log('Build Complete!');
       });
       
-The build method returns a Promise which can be used to do additional work once the pagination build process is done. 
+The build method returns a Promise which can be used to do additional work once the pagination build process is done. You can write a timer / scheduler around the `buildLatestPostsPages()` that periodically invalidate and rebuild the cache. One example using setTimeout is as follows:
+
+    const PROCESSING_INTERVAL = 300000; // every 5 mins
+    const startProcessing = () => {
+      buildLatestPostsPages()
+        .then(() => {
+          console.log('Build Complete!');
+          setTimeout(startProcessing, PROCESSING_INTERVAL);
+        });
+    };
+    
+    startProcessing();
     
 ## Retrieving pages
 
