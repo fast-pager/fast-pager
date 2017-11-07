@@ -1,5 +1,7 @@
 # FastPager
 
+[![Build Status](https://travis-ci.org/fast-pager/fast-pager.svg?branch=master)](https://travis-ci.org/fast-pager/fast-pager)
+
 Cached Paginator for Node.JS
 
 The goal of FastPager is to introduce an easy way to paginate a long list of results into pages through a storage strategy to improve web page loads and server performance.
