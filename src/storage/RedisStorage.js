@@ -19,8 +19,12 @@ RedisStorage.prototype.write = function write(page, data) {
 RedisStorage.prototype.read = function read(page) {
   return new Promise((resolve, reject) => {
     this._client.get(this._key + '-' + page, (err, reply) => {
-      if (err || reply === null) {
+      if (err) {
         reject(err);
+        return;
+      }
+      if (reply === null) {
+        resolve(null);
         return;
       }
       resolve(JSON.parse(reply));
