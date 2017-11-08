@@ -22,6 +22,11 @@ FileStorage.prototype.read = function read(page) {
     let pathname = this._pathname + '-' + page;
     fs.readFile(pathname, (err, data) => {
       if (err) {
+        if (err.code === 'ENOENT') {
+          // file does not exist
+          resolve(null);
+          return;
+        }
         reject(err);
         return;
       }
